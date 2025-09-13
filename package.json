@@ -1,0 +1,38 @@
+{
+  "name": "hugo-hygraph-integration",
+  "version": "1.0.0",
+  "description": "A Hugo static site with Hygraph headless CMS integration",
+  "main": "index.js",
+  "scripts": {
+    "build": "hugo --minify",
+    "dev": "hugo server -D",
+    "serve": "hugo server --bind 0.0.0.0 --port 1313",
+    "clean": "rm -rf public",
+    "setup": "powershell -ExecutionPolicy Bypass -File setup.ps1"
+  },
+  "keywords": [
+    "hugo",
+    "hygraph",
+    "cms",
+    "headless",
+    "static-site",
+    "graphql",
+    "blog"
+  ],
+  "author": "Your Name",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/yourusername/hugo-hygraph-integration.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yourusername/hugo-hygraph-integration/issues"
+  },
+  "homepage": "https://github.com/yourusername/hugo-hygraph-integration#readme",
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

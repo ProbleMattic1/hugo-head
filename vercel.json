@@ -1,0 +1,26 @@
+{
+  "buildCommand": "hugo --minify",
+  "outputDirectory": "public",
+  "framework": "hugo",
+  "installCommand": "echo 'Hugo is built into Vercel'",
+  "functions": {
+    "api/hygraph-webhook.js": {
+      "maxDuration": 30
+    }
+  },
+  "env": {
+    "HYGRAPH_ENDPOINT": "@hygraph_endpoint",
+    "HYGRAPH_API_TOKEN": "@hygraph_api_token"
+  },
+  "headers": [
+    {
+      "source": "/static/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=31536000, immutable"
+        }
+      ]
+    }
+  ]
+}

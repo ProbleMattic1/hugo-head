@@ -1,0 +1,30 @@
+baseURL = "https://example.org/"
+languageCode = "en-us"
+title = "My Hugo Site with Hygraph CMS"
+
+# Hugo theme (we'll create a custom one)
+theme = ""
+
+# Enable build with remote resources
+[build]
+  writeStats = true
+  noJSConfigInAssets = true
+
+# Enable the GetRemote function for external API calls
+[params]
+  enableGetRemote = true
+
+# Configure the site to work with Hygraph
+[params.hygraph]
+  endpoint = "https://api.hygraph.com/v2/your_project_id/master"
+  # This will be replaced with your actual Hygraph endpoint
+
+# Enable GraphQL support
+[params.graphql]
+  enabled = true
+
+# Site metadata
+[params.meta]
+  description = "A Hugo site powered by Hygraph headless CMS"
+  keywords = ["hugo", "hygraph", "cms", "headless"]
+  author = "Your Name"

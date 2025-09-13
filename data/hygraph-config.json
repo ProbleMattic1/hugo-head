@@ -1,0 +1,136 @@
+{
+  "endpoint": "https://api.hygraph.com/v2/your_project_id/master",
+  "api_token": "YOUR_API_TOKEN_HERE",
+  "content_models": {
+    "blog_post": {
+      "name": "Blog Post",
+      "fields": [
+        {
+          "name": "title",
+          "type": "String",
+          "required": true,
+          "description": "The title of the blog post"
+        },
+        {
+          "name": "slug",
+          "type": "String",
+          "required": true,
+          "description": "URL-friendly version of the title"
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "required": false,
+          "description": "Short description or excerpt"
+        },
+        {
+          "name": "content",
+          "type": "RichText",
+          "required": true,
+          "description": "Main content of the blog post"
+        },
+        {
+          "name": "featured_image",
+          "type": "Asset",
+          "required": false,
+          "description": "Featured image for the post"
+        },
+        {
+          "name": "author",
+          "type": "Author",
+          "required": false,
+          "description": "Author of the blog post"
+        },
+        {
+          "name": "published_at",
+          "type": "DateTime",
+          "required": true,
+          "description": "Publication date"
+        },
+        {
+          "name": "tags",
+          "type": "String",
+          "required": false,
+          "description": "Tags for categorization",
+          "multiple": true
+        },
+        {
+          "name": "category",
+          "type": "Category",
+          "required": false,
+          "description": "Post category"
+        }
+      ]
+    },
+    "author": {
+      "name": "Author",
+      "fields": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true,
+          "description": "Author's full name"
+        },
+        {
+          "name": "email",
+          "type": "String",
+          "required": false,
+          "description": "Author's email address"
+        },
+        {
+          "name": "bio",
+          "type": "RichText",
+          "required": false,
+          "description": "Author's biography"
+        },
+        {
+          "name": "avatar",
+          "type": "Asset",
+          "required": false,
+          "description": "Author's profile picture"
+        }
+      ]
+    },
+    "category": {
+      "name": "Category",
+      "fields": [
+        {
+          "name": "name",
+          "type": "String",
+          "required": true,
+          "description": "Category name"
+        },
+        {
+          "name": "slug",
+          "type": "String",
+          "required": true,
+          "description": "URL-friendly category name"
+        },
+        {
+          "name": "description",
+          "type": "String",
+          "required": false,
+          "description": "Category description"
+        }
+      ]
+    }
+  },
+  "graphql_queries": {
+    "blog_posts": {
+      "query": "query { blogPosts { id title slug description content featuredImage { url alt } author { name email } publishedAt tags category { name slug } } }",
+      "description": "Fetch all blog posts with related data"
+    },
+    "single_post": {
+      "query": "query getPost($slug: String!) { blogPost(where: { slug: $slug }) { id title slug description content featuredImage { url alt } author { name email bio avatar { url } } publishedAt tags category { name slug } } }",
+      "description": "Fetch a single blog post by slug"
+    },
+    "authors": {
+      "query": "query { authors { id name email bio avatar { url } } }",
+      "description": "Fetch all authors"
+    },
+    "categories": {
+      "query": "query { categories { id name slug description } }",
+      "description": "Fetch all categories"
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{{/* Hygraph Integration Partial */}}
+{{/* This partial handles fetching and displaying content from Hygraph */}}
+
+{{/* Configuration from data file */}}
+{{ $hygraphConfig := .Site.Data.hygraph-config }}
+
+{{/* GraphQL query for blog posts */}}
+{{ $query := `{
+  blogPosts {
+    id
+    title
+    slug
+    description
+    content
+    featuredImage {
+      url
+      alt
+    }
+    author {
+      name
+      email
+    }
+    publishedAt
+    tags
+    category {
+      name
+      slug
+    }
+  }
+}` }}
+
+{{/* Prepare the request options */}}
+{{ $options := dict
+  "method" "POST"
+  "headers" (dict 
+    "Content-Type" "application/json"
+    "Authorization" (printf "Bearer %s" $hygraphConfig.api_token)
+  )
+  "body" (printf `{"query": %s}` (jsonify $query))
+}}
+
+{{/* Fetch data from Hygraph */}}
+{{ with resources.GetRemote $hygraphConfig.endpoint $options }}
+  {{ if .Err }}
+    {{/* Handle error - could be API down, wrong endpoint, etc. */}}
+    <div class="hygraph-error">
+      <p>Unable to load content from Hygraph: {{ .Err }}</p>
+      <p>Please check your configuration and try again.</p>
+    </div>
+  {{ else }}
+    {{/* Parse the JSON response */}}
+    {{ $data := .Content | transform.Unmarshal }}
+    
+    {{ if $data.data.blogPosts }}
+      {{/* Render the blog posts */}}
+      <div class="hygraph-posts">
+        <h2>Content from Hygraph CMS</h2>
+        <div class="posts-grid">
+          {{ range $data.data.blogPosts }}
+            <article class="post-card hygraph-post">
+              {{ if .featuredImage }}
+                <div class="post-card-image">
+                  <img src="{{ .featuredImage.url }}" alt="{{ .featuredImage.alt | default .title }}" />
+                </div>
+              {{ end }}
+              
+              <div class="post-card-content">
+                <h3 class="post-card-title">
+                  {{ .title }}
+                </h3>
+                
+                {{ if .description }}
+                  <p class="post-card-description">{{ .description }}</p>
+                {{ end }}
+                
+                <div class="post-card-meta">
+                  {{ if .publishedAt }}
+                    <time datetime="{{ .publishedAt }}">
+                      {{ dateFormat "January 2, 2006" .publishedAt }}
+                    </time>
+                  {{ end }}
+                  {{ if .author }}
+                    <span class="post-author">by {{ .author.name }}</span>
+                  {{ end }}
+                </div>
+                
+                {{ if .tags }}
+                  <div class="post-card-tags">
+                    {{ range first 3 .tags }}
+                      <span class="tag">{{ . }}</span>
+                    {{ end }}
+                  </div>
+                {{ end }}
+                
+                {{ if .category }}
+                  <div class="post-category">
+                    <span class="category-tag">{{ .category.name }}</span>
+                  </div>
+                {{ end }}
+              </div>
+            </article>
+          {{ end }}
+        </div>
+      </div>
+    {{ else }}
+      {{/* No posts found */}}
+      <div class="hygraph-no-content">
+        <p>No blog posts found in Hygraph. Add some content to see it here!</p>
+      </div>
+    {{ end }}
+  {{ end }}
+{{ end }}
+
+{{/* Additional CSS for Hygraph-specific styling */}}
+<style>
+.hygraph-error {
+  background: #f8d7da;
+  color: #721c24;
+  padding: 1rem;
+  border-radius: 5px;
+  margin: 2rem 0;
+}
+
+.hygraph-post {
+  border: 2px solid #007bff;
+}
+
+.hygraph-no-content {
+  text-align: center;
+  color: #666;
+  font-style: italic;
+  margin: 2rem 0;
+}
+
+.category-tag {
+  display: inline-block;
+  background: #28a745;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  margin-top: 0.5rem;
+}
+</style>

@@ -1,0 +1,59 @@
+{{ define "main" }}
+<div class="content-list">
+    <div class="container">
+        <header class="page-header">
+            <h1 class="page-title">{{ .Title }}</h1>
+            {{ if .Content }}
+            <div class="page-description">
+                {{ .Content }}
+            </div>
+            {{ end }}
+        </header>
+        
+        <div class="posts-grid">
+            {{ range .Pages }}
+            <article class="post-card">
+                {{ if .Params.featured_image }}
+                <div class="post-card-image">
+                    <a href="{{ .Permalink }}">
+                        <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" />
+                    </a>
+                </div>
+                {{ end }}
+                
+                <div class="post-card-content">
+                    <h2 class="post-card-title">
+                        <a href="{{ .Permalink }}">{{ .Title }}</a>
+                    </h2>
+                    
+                    {{ if .Params.description }}
+                    <p class="post-card-description">{{ .Params.description }}</p>
+                    {{ end }}
+                    
+                    <div class="post-card-meta">
+                        <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+                            {{ .Date.Format "January 2, 2006" }}
+                        </time>
+                        {{ if .Params.author }}
+                        <span class="post-author">by {{ .Params.author }}</span>
+                        {{ end }}
+                    </div>
+                    
+                    {{ if .Params.tags }}
+                    <div class="post-card-tags">
+                        {{ range first 3 .Params.tags }}
+                        <span class="tag">{{ . }}</span>
+                        {{ end }}
+                    </div>
+                    {{ end }}
+                </div>
+            </article>
+            {{ end }}
+        </div>
+        
+        {{ if gt (len .Pages) 0 }}
+        {{ partial "pagination" . }}
+        {{ end }}
+    </div>
+</div>
+{{ end }}

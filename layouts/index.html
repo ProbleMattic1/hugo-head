@@ -1,0 +1,53 @@
+{{ define "main" }}
+<div class="homepage">
+    <section class="hero">
+        <div class="container">
+            <h1 class="hero-title">{{ .Site.Title }}</h1>
+            <p class="hero-description">{{ .Site.Params.description }}</p>
+            <a href="{{ "blog" | relURL }}" class="btn btn-primary">Read Our Blog</a>
+        </div>
+    </section>
+    
+    <section class="featured-posts">
+        <div class="container">
+            <h2>Latest Posts</h2>
+            <div class="posts-grid">
+                {{ range first 3 (where .Site.Pages "Type" "blog") }}
+                <article class="post-card">
+                    {{ if .Params.featured_image }}
+                    <div class="post-card-image">
+                        <a href="{{ .Permalink }}">
+                            <img src="{{ .Params.featured_image }}" alt="{{ .Title }}" />
+                        </a>
+                    </div>
+                    {{ end }}
+                    
+                    <div class="post-card-content">
+                        <h3 class="post-card-title">
+                            <a href="{{ .Permalink }}">{{ .Title }}</a>
+                        </h3>
+                        
+                        {{ if .Params.description }}
+                        <p class="post-card-description">{{ .Params.description }}</p>
+                        {{ end }}
+                        
+                        <div class="post-card-meta">
+                            <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+                                {{ .Date.Format "January 2, 2006" }}
+                            </time>
+                        </div>
+                    </div>
+                </article>
+                {{ end }}
+            </div>
+        </div>
+    </section>
+    
+    <!-- Hygraph Content Integration Section -->
+    <section class="hygraph-content">
+        <div class="container">
+            {{ partial "hygraph-integration" . }}
+        </div>
+    </section>
+</div>
+{{ end }}

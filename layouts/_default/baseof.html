@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ if .Title }}{{ .Title }} | {{ end }}{{ .Site.Title }}</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta name="keywords" content="{{ delimit .Keywords "," }}{{ if .Site.Params.keywords }},{{ delimit .Site.Params.keywords "," }}{{ end }}">
+    <meta name="author" content="{{ if .Params.author }}{{ .Params.author }}{{ else }}{{ .Site.Params.author }}{{ end }}">
+    
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="{{ if .Title }}{{ .Title }}{{ else }}{{ .Site.Title }}{{ end }}">
+    <meta property="og:description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+    <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+    <meta property="og:url" content="{{ .Permalink }}">
+    {{ if .Params.featured_image }}
+    <meta property="og:image" content="{{ .Params.featured_image }}">
+    {{ end }}
+    
+    <!-- CSS -->
+    <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="{{ "favicon.ico" | relURL }}">
+</head>
+<body>
+    <header class="site-header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="{{ .Site.BaseURL }}" class="navbar-brand">{{ .Site.Title }}</a>
+                <ul class="navbar-nav">
+                    <li><a href="{{ .Site.BaseURL }}">Home</a></li>
+                    <li><a href="{{ "blog" | relURL }}">Blog</a></li>
+                    <li><a href="{{ "about" | relURL }}">About</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main-content">
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="site-footer">
+        <div class="container">
+            <p>&copy; {{ now.Format "2006" }} {{ .Site.Title }}. All rights reserved.</p>
+            <p>Powered by <a href="https://gohugo.io">Hugo</a> and <a href="https://hygraph.com">Hygraph</a></p>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="{{ "js/main.js" | relURL }}"></script>
+</body>
+</html>
