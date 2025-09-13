@@ -4,13 +4,13 @@
   "framework": "hugo",
   "installCommand": "echo 'Hugo is built into Vercel'",
   "functions": {
-    "api/hygraph-webhook.js": {
+    "api/cms-webhook.js": {
       "maxDuration": 30
     }
   },
   "env": {
-    "HYGRAPH_ENDPOINT": "@hygraph_endpoint",
-    "HYGRAPH_API_TOKEN": "@hygraph_api_token"
+    "CMS_ENDPOINT": "@cms_endpoint",
+    "CMS_API_TOKEN": "@cms_api_token"
   },
   "headers": [
     {

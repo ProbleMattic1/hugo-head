@@ -1,6 +1,6 @@
 baseURL = "https://example.org/"
 languageCode = "en-us"
-title = "My Hugo Site with Hygraph CMS"
+title = "My Hugo Site with Headless CMS"
 
 # Hugo theme (we'll create a custom one)
 theme = ""
@@ -14,10 +14,10 @@ theme = ""
 [params]
   enableGetRemote = true
 
-# Configure the site to work with Hygraph
-[params.hygraph]
-  endpoint = "https://api.hygraph.com/v2/your_project_id/master"
-  # This will be replaced with your actual Hygraph endpoint
+# Configure the site to work with headless CMS
+[params.cms]
+  endpoint = "https://api.your-cms.com/endpoint"
+  # This will be replaced with your actual CMS endpoint
 
 # Enable GraphQL support
 [params.graphql]
@@ -25,6 +25,6 @@ theme = ""
 
 # Site metadata
 [params.meta]
-  description = "A Hugo site powered by Hygraph headless CMS"
-  keywords = ["hugo", "hygraph", "cms", "headless"]
+  description = "A Hugo site powered by headless CMS"
+  keywords = ["hugo", "cms", "headless", "static-site"]
   author = "Your Name"

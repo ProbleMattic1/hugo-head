@@ -1,8 +1,8 @@
-{{/* Hygraph Integration Partial */}}
-{{/* This partial handles fetching and displaying content from Hygraph */}}
+{{/* Headless CMS Integration Partial */}}
+{{/* This partial handles fetching and displaying content from your headless CMS */}}
 
 {{/* Configuration from data file */}}
-{{ $hygraphConfig := .Site.Data.hygraph-config }}
+{{ $cmsConfig := .Site.Data.cms-config }}
 
 {{/* GraphQL query for blog posts */}}
 {{ $query := `{
@@ -34,17 +34,17 @@
   "method" "POST"
   "headers" (dict 
     "Content-Type" "application/json"
-    "Authorization" (printf "Bearer %s" $hygraphConfig.api_token)
+    "Authorization" (printf "Bearer %s" $cmsConfig.api_token)
   )
   "body" (printf `{"query": %s}` (jsonify $query))
 }}
 
-{{/* Fetch data from Hygraph */}}
-{{ with resources.GetRemote $hygraphConfig.endpoint $options }}
+{{/* Fetch data from CMS */}}
+{{ with resources.GetRemote $cmsConfig.endpoint $options }}
   {{ if .Err }}
     {{/* Handle error - could be API down, wrong endpoint, etc. */}}
-    <div class="hygraph-error">
-      <p>Unable to load content from Hygraph: {{ .Err }}</p>
+    <div class="cms-error">
+      <p>Unable to load content from CMS: {{ .Err }}</p>
       <p>Please check your configuration and try again.</p>
     </div>
   {{ else }}
@@ -53,11 +53,11 @@
     
     {{ if $data.data.blogPosts }}
       {{/* Render the blog posts */}}
-      <div class="hygraph-posts">
-        <h2>Content from Hygraph CMS</h2>
+      <div class="cms-posts">
+        <h2>Content from Headless CMS</h2>
         <div class="posts-grid">
           {{ range $data.data.blogPosts }}
-            <article class="post-card hygraph-post">
+            <article class="post-card cms-post">
               {{ if .featuredImage }}
                 <div class="post-card-image">
                   <img src="{{ .featuredImage.url }}" alt="{{ .featuredImage.alt | default .title }}" />
@@ -104,16 +104,16 @@
       </div>
     {{ else }}
       {{/* No posts found */}}
-      <div class="hygraph-no-content">
-        <p>No blog posts found in Hygraph. Add some content to see it here!</p>
+      <div class="cms-no-content">
+        <p>No blog posts found in CMS. Add some content to see it here!</p>
       </div>
     {{ end }}
   {{ end }}
 {{ end }}
 
-{{/* Additional CSS for Hygraph-specific styling */}}
+{{/* Additional CSS for CMS-specific styling */}}
 <style>
-.hygraph-error {
+.cms-error {
   background: #f8d7da;
   color: #721c24;
   padding: 1rem;
@@ -121,11 +121,11 @@
   margin: 2rem 0;
 }
 
-.hygraph-post {
+.cms-post {
   border: 2px solid #007bff;
 }
 
-.hygraph-no-content {
+.cms-no-content {
   text-align: center;
   color: #666;
   font-style: italic;

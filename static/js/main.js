@@ -1,8 +1,8 @@
-// Main JavaScript file for Hugo-Hygraph integration
+// Main JavaScript file for Hugo-Headless CMS integration
 
 // Configuration
-const HYGRAPH_CONFIG = {
-    endpoint: 'https://api.hygraph.com/v2/your_project_id/master', // Replace with your actual endpoint
+const CMS_CONFIG = {
+    endpoint: 'https://api.your-cms.com/endpoint', // Replace with your actual endpoint
     headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer YOUR_API_TOKEN' // Replace with your actual token
@@ -33,12 +33,12 @@ const BLOG_POSTS_QUERY = `
     }
 `;
 
-// Fetch data from Hygraph
-async function fetchFromHygraph(query) {
+// Fetch data from CMS
+async function fetchFromCMS(query) {
     try {
-        const response = await fetch(HYGRAPH_CONFIG.endpoint, {
+        const response = await fetch(CMS_CONFIG.endpoint, {
             method: 'POST',
-            headers: HYGRAPH_CONFIG.headers,
+            headers: CMS_CONFIG.headers,
             body: JSON.stringify({ query })
         });
 
@@ -55,17 +55,17 @@ async function fetchFromHygraph(query) {
 
         return data.data;
     } catch (error) {
-        console.error('Error fetching from Hygraph:', error);
+        console.error('Error fetching from CMS:', error);
         return null;
     }
 }
 
-// Render blog posts from Hygraph data
-function renderHygraphPosts(posts) {
-    const container = document.getElementById('hygraph-content');
+// Render blog posts from CMS data
+function renderCMSPosts(posts) {
+    const container = document.getElementById('cms-content');
     
     if (!posts || posts.length === 0) {
-        container.innerHTML = '<p>No posts available from Hygraph.</p>';
+        container.innerHTML = '<p>No posts available from CMS.</p>';
         return;
     }
 
@@ -113,19 +113,19 @@ function renderHygraphPosts(posts) {
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', async function() {
-    console.log('Hugo-Hygraph integration initialized');
+    console.log('Hugo-Headless CMS integration initialized');
     
-    // Check if we're on the homepage and should load Hygraph content
+    // Check if we're on the homepage and should load CMS content
     if (window.location.pathname === '/' || window.location.pathname === '') {
         try {
-            const data = await fetchFromHygraph(BLOG_POSTS_QUERY);
+            const data = await fetchFromCMS(BLOG_POSTS_QUERY);
             if (data && data.blogPosts) {
-                renderHygraphPosts(data.blogPosts);
+                renderCMSPosts(data.blogPosts);
             }
         } catch (error) {
-            console.error('Failed to load Hygraph content:', error);
-            document.getElementById('hygraph-content').innerHTML = 
-                '<p>Unable to load content from Hygraph. Please check your configuration.</p>';
+            console.error('Failed to load CMS content:', error);
+            document.getElementById('cms-content').innerHTML = 
+                '<p>Unable to load content from CMS. Please check your configuration.</p>';
         }
     }
 });
@@ -147,9 +147,9 @@ function slugify(text) {
 }
 
 // Export for use in other scripts
-window.HygraphIntegration = {
-    fetchFromHygraph,
-    renderHygraphPosts,
+window.CMSIntegration = {
+    fetchFromCMS,
+    renderCMSPosts,
     formatDate,
     slugify
 };

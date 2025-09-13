@@ -26,6 +26,6 @@
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
 
-# Hygraph webhook configuration
+# CMS webhook configuration
 [build.environment]
-  HYGRAPH_WEBHOOK_SECRET = "your_webhook_secret"
+  CMS_WEBHOOK_SECRET = "your_webhook_secret"

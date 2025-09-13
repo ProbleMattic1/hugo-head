@@ -1,7 +1,7 @@
-# Hugo-Hygraph Setup Script for Windows PowerShell
-# This script helps set up the Hugo-Hygraph integration
+# Hugo-Headless CMS Setup Script for Windows PowerShell
+# This script helps set up the Hugo-Headless CMS integration
 
-Write-Host "🚀 Hugo-Hygraph Setup Script" -ForegroundColor Green
+Write-Host "🚀 Hugo-Headless CMS Setup Script" -ForegroundColor Green
 Write-Host "================================" -ForegroundColor Green
 
 # Check if Hugo is installed
@@ -25,7 +25,7 @@ if (Test-Path "env.example") {
     if (-not (Test-Path ".env")) {
         Copy-Item "env.example" ".env"
         Write-Host "✅ Created .env file from template" -ForegroundColor Green
-        Write-Host "⚠️  Please edit .env file with your Hygraph credentials" -ForegroundColor Yellow
+        Write-Host "⚠️  Please edit .env file with your CMS credentials" -ForegroundColor Yellow
     } else {
         Write-Host "ℹ️  .env file already exists" -ForegroundColor Blue
     }
@@ -61,13 +61,13 @@ try {
 
 # Display next steps
 Write-Host "`n📝 Next Steps:" -ForegroundColor Yellow
-Write-Host "1. Sign up for a Hygraph account at https://hygraph.com" -ForegroundColor Cyan
-Write-Host "2. Create a new project in Hygraph" -ForegroundColor Cyan
+Write-Host "1. Choose a headless CMS (Strapi, Sanity, Hygraph, Contentful, etc.)" -ForegroundColor Cyan
+Write-Host "2. Create a new project in your chosen CMS" -ForegroundColor Cyan
 Write-Host "3. Set up content models (Blog Post, Author, Category)" -ForegroundColor Cyan
-Write-Host "4. Get your API endpoint and token from Hygraph" -ForegroundColor Cyan
+Write-Host "4. Get your API endpoint and token from your CMS" -ForegroundColor Cyan
 Write-Host "5. Update .env file with your credentials" -ForegroundColor Cyan
-Write-Host "6. Update data/hygraph-config.json with your project details" -ForegroundColor Cyan
-Write-Host "7. Add some content in Hygraph" -ForegroundColor Cyan
+Write-Host "6. Update data/cms-config.json with your project details" -ForegroundColor Cyan
+Write-Host "7. Add some content in your CMS" -ForegroundColor Cyan
 Write-Host "8. Run 'hugo server' to test locally" -ForegroundColor Cyan
 
 Write-Host "`n🎉 Setup complete! Check the README.md for detailed instructions." -ForegroundColor Green

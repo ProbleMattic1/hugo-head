@@ -1,6 +1,6 @@
 # Quick Start Guide
 
-Get your Hugo-Hygraph integration running in 10 minutes!
+Get your Hugo-Headless CMS integration running in 10 minutes!
 
 ## 🚀 Quick Setup
 
@@ -9,9 +9,9 @@ Get your Hugo-Hygraph integration running in 10 minutes!
 .\setup.ps1
 ```
 
-### 2. Create Hygraph Project
-1. Go to [hygraph.com](https://hygraph.com) and sign up
-2. Create a new "Blank Project"
+### 2. Create CMS Project
+1. Choose your headless CMS (Strapi, Sanity, Hygraph, Contentful, etc.)
+2. Create a new project/workspace
 3. Name it "Hugo Blog CMS"
 
 ### 3. Set Up Content Models
@@ -39,23 +39,23 @@ Get your Hugo-Hygraph integration running in 10 minutes!
 - **Description**: String
 
 ### 4. Configure API Access
-1. Go to Project Settings → API Access
-2. Copy your GraphQL endpoint URL
-3. Generate a permanent auth token
+1. Go to your CMS's API/Settings section
+2. Copy your GraphQL/REST endpoint URL
+3. Generate a permanent auth token or API key
 
 ### 5. Update Configuration
 1. Edit `.env` file:
    ```
-   HYGRAPH_ENDPOINT=https://api.hygraph.com/v2/YOUR_PROJECT_ID/master
-   HYGRAPH_API_TOKEN=your_token_here
+   CMS_ENDPOINT=https://api.your-cms.com/endpoint
+   CMS_API_TOKEN=your_token_here
    ```
 
-2. Edit `data/hygraph-config.json`:
-   - Replace `your_project_id` with your actual project ID
+2. Edit `data/cms-config.json`:
+   - Replace the endpoint URL with your actual CMS API endpoint
    - Replace `YOUR_API_TOKEN_HERE` with your actual token
 
 ### 6. Add Sample Content
-1. Create an author profile
+1. Create an author profile in your CMS
 2. Create a category
 3. Create a blog post with featured image
 
@@ -92,7 +92,7 @@ Visit `http://localhost:1313` to see your site!
 
 **Content not loading?**
 - Check your API endpoint and token
-- Verify content is published in Hygraph
+- Verify content is published in your CMS
 - Check browser console for errors
 
 **Build failing?**
@@ -102,13 +102,13 @@ Visit `http://localhost:1313` to see your site!
 
 **Need help?**
 - Check the full README.md
-- Review Hygraph documentation
+- Review your CMS documentation
 - Check Hugo documentation
 
 ## 🎯 Next Steps
 
 - Customize the design in `static/css/style.css`
-- Add more content types in Hygraph
+- Add more content types in your CMS
 - Set up staging environment
 - Implement caching strategies
 - Add SEO optimizations

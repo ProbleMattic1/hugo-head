@@ -1,7 +1,7 @@
 {
-  "name": "hugo-hygraph-integration",
+  "name": "hugo-headless-cms-integration",
   "version": "1.0.0",
-  "description": "A Hugo static site with Hygraph headless CMS integration",
+  "description": "A Hugo static site with headless CMS integration",
   "main": "index.js",
   "scripts": {
     "build": "hugo --minify",
@@ -12,23 +12,24 @@
   },
   "keywords": [
     "hugo",
-    "hygraph",
     "cms",
     "headless",
     "static-site",
     "graphql",
-    "blog"
+    "blog",
+    "strapi",
+    "sanity"
   ],
   "author": "Your Name",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/yourusername/hugo-hygraph-integration.git"
+    "url": "https://github.com/yourusername/hugo-headless-cms-integration.git"
   },
   "bugs": {
-    "url": "https://github.com/yourusername/hugo-hygraph-integration/issues"
+    "url": "https://github.com/yourusername/hugo-headless-cms-integration/issues"
   },
-  "homepage": "https://github.com/yourusername/hugo-hygraph-integration#readme",
+  "homepage": "https://github.com/yourusername/hugo-headless-cms-integration#readme",
   "devDependencies": {
     "@types/node": "^20.0.0"
   },

@@ -263,14 +263,14 @@ a:hover {
     color: #fff;
 }
 
-/* Hygraph Content */
-.hygraph-content {
+/* Headless CMS Content */
+.cms-content {
     background: #f8f9fa;
     padding: 3rem 0;
     margin: 3rem 0;
 }
 
-.hygraph-content h2 {
+.cms-content h2 {
     text-align: center;
     margin-bottom: 2rem;
 }

@@ -1,5 +1,5 @@
 {
-  "endpoint": "https://api.hygraph.com/v2/your_project_id/master",
+  "endpoint": "https://api.your-cms.com/endpoint",
   "api_token": "YOUR_API_TOKEN_HERE",
   "content_models": {
     "blog_post": {

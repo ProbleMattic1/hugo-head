@@ -2,14 +2,14 @@
 title: "About Us"
 date: 2024-01-01
 draft: false
-description: "Learn more about our company and how we use Hugo with Hygraph"
+description: "Learn more about our company and how we use Hugo with headless CMS"
 ---
 
-# About Our Hugo-Hygraph Integration
+# About Our Hugo-Headless CMS Integration
 
-We are passionate about creating modern, fast, and maintainable websites. This site demonstrates the power of combining Hugo's static site generation with Hygraph's headless CMS capabilities.
+We are passionate about creating modern, fast, and maintainable websites. This site demonstrates the power of combining Hugo's static site generation with headless CMS capabilities.
 
-## Why Hugo + Hygraph?
+## Why Hugo + Headless CMS?
 
 ### Hugo Benefits
 - **Lightning Fast**: Static sites load incredibly quickly
@@ -17,8 +17,8 @@ We are passionate about creating modern, fast, and maintainable websites. This s
 - **Secure**: No database means fewer security vulnerabilities
 - **Cost Effective**: Host anywhere, pay less
 
-### Hygraph Benefits
-- **Developer Friendly**: GraphQL API for flexible data fetching
+### Headless CMS Benefits
+- **Developer Friendly**: GraphQL/REST API for flexible data fetching
 - **Content Management**: Easy-to-use interface for content creators
 - **Scalable**: Handle any amount of content
 - **Integrations**: Works seamlessly with modern deployment platforms
@@ -26,7 +26,7 @@ We are passionate about creating modern, fast, and maintainable websites. This s
 ## Our Technology Stack
 
 - **Hugo**: Static site generator
-- **Hygraph**: Headless CMS
+- **Headless CMS**: Content management system
 - **GraphQL**: API query language
 - **Netlify/Vercel**: Deployment platform
 - **Git**: Version control
